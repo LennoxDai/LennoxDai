@@ -17,7 +17,7 @@ I'm a senior Computer Science student at Xi'an Jiaotong University, incoming PhD
 
 - 🎓 Exchange Student at **UC Berkeley** (2024)
 - 🔬 Member of **XJTU Luo Lab**
-- 🧪 Research Assistant at **Westlake University LINS Lab**
+- 🧪 Previous Research Assistant at **Westlake University LINS Lab**
 - 💼 Previous Internships at **4Paradigm** (Shanghai) and **Merit Interactive** (Hangzhou)
 
 ---
