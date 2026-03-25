@@ -2,7 +2,7 @@
 
 ![Visitor Badge](https://komarev.com/ghpvc/?username=LennoxDai&style=flat-square&color=blueviolet)
 
-I'm a senior Computer Science student at Xi'an Jiaotong University, incoming PhD student at **Fudan University** & **Shanghai AI Laboratory**, passionate about software development & AI research!
+I'm a senior Computer Science student at Xi'an Jiaotong University, incoming PhD student at **Fudan University** & **Shanghai AI Laboratory**, passionate about software development.
 
 ---
 
@@ -17,7 +17,7 @@ I'm a senior Computer Science student at Xi'an Jiaotong University, incoming PhD
 
 - 🎓 Exchange Student at **UC Berkeley** (2024)
 - 🔬 Member of **XJTU Luo Lab**
-- 🧪 Previous Research Assistant at **Westlake University LINS Lab**
+- 🧪 Research Assistant at **Westlake University LINS Lab**
 - 💼 Previous Internships at **4Paradigm** (Shanghai) and **Merit Interactive** (Hangzhou)
 
 ---
@@ -26,6 +26,7 @@ I'm a senior Computer Science student at Xi'an Jiaotong University, incoming PhD
 
 - 📧 Email: [daixuanlang777@gmail.com](mailto:daixuanlang777@gmail.com)
 - 🌐 Personal Website: [Lennox - Personal Webpage](https://lennox-dai-github-io.vercel.app/)
+- 🏠 Academic Homepage: [lennoxdai.github.io](https://lennoxdai.github.io/LennoxDai/)
 - 🎓 Google Scholar: [Xuanlang Dai](https://scholar.google.com/citations?user=OeeH1HAAAAAJ&hl=en)
 - 🤗 Hugging Face: [XuanlangDai](https://huggingface.co/XuanlangDai)
 
