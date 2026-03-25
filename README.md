@@ -2,7 +2,7 @@
 
 ![Visitor Badge](https://komarev.com/ghpvc/?username=LennoxDai&style=flat-square&color=blueviolet)
 
-I'm a senior Computer Science student at Xi'an Jiaotong University, incoming PhD student at **Fudan University** & **Shanghai AI Laboratory**, passionate about software development.
+I'm a senior Computer Science student at Xi'an Jiaotong University, incoming PhD student at **Fudan University** & **Shanghai AI Laboratory**, passionate about software development & AI research!
 
 ---
 
