@@ -25,7 +25,6 @@ I'm a senior Computer Science student at Xi'an Jiaotong University, incoming PhD
 ### 📫 How to Reach Me
 
 - 📧 Email: [daixuanlang777@gmail.com](mailto:daixuanlang777@gmail.com)
-- 🌐 Personal Website: [Lennox - Personal Webpage](https://lennox-dai-github-io.vercel.app/)
 - 🏠 Academic Homepage: [lennoxdai.github.io](https://lennoxdai.github.io/LennoxDai/)
 - 🎓 Google Scholar: [Xuanlang Dai](https://scholar.google.com/citations?user=OeeH1HAAAAAJ&hl=en)
 - 🤗 Hugging Face: [XuanlangDai](https://huggingface.co/XuanlangDai)
