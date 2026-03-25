@@ -1,5 +1,7 @@
 # Hi there 👋 I'm Lennox Dai
 
+![Visitor Badge](https://komarev.com/ghpvc/?username=LennoxDai&style=flat-square&color=blueviolet)
+
 I'm a senior Computer Science student at Xi'an Jiaotong University, incoming PhD student at **Fudan University** & **Shanghai AI Laboratory**, passionate about software development.
 
 ---
@@ -35,6 +37,12 @@ I'm a senior Computer Science student at Xi'an Jiaotong University, incoming PhD
 - 🥤 Cola enthusiast
 - 🎮 Anime lover and dedicated Satone Shichimiya fan
 - 🔑 Once lost a GitHub account — find my old one here: [Lennox-Dai (Vitamind)](https://github.com/Lennox-Dai)
+
+---
+
+### 🐱 Random Cat
+
+![Random Pixel Cat](https://cataas.com/cat?filter=pixel)
 
 ---
 
