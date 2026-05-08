@@ -56,4 +56,4 @@ I'm a senior Computer Science student at Xi'an Jiaotong University, incoming PhD
 
 ---
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=LennoxDai&show_icons=true&theme=radical)
+![GitHub Stats](https://github-readme-stats-sigma-five.vercel.app/api?username=LennoxDai&show_icons=true&theme=radical)
