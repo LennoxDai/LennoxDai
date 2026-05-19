@@ -1,0 +1,14 @@
+[
+  {
+    "id": "diffusion-intro",
+    "title": "Diffusion Model 简单介绍",
+    "kicker": "featured / diffusion",
+    "date": "2026-05-15",
+    "path": "1/index.html",
+    "markdown": "1/1.md",
+    "pdf": "1/1.pdf",
+    "thumbnail": "1/image/1.png",
+    "summary": "DDPM, DDIM, score-based models, flow matching, text-conditioned generation, CFG, acceleration, RL alignment, caching, and tooling.",
+    "tags": ["Diffusion", "DDPM", "DDIM", "Flow Matching", "Markdown"]
+  }
+]

@@ -1,635 +1,1566 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Xuanlang Dai</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%235a7fd4'/><rect x='6' y='6' width='5' height='19' rx='2' fill='white'/><rect x='6' y='20' width='17' height='5' rx='2' fill='white'/><circle cx='23' cy='10' r='4' fill='%23e090b8'/></svg>"/>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
-<style>
-:root {
-  --bg:       #faf9fc;
-  --surface:  #ffffff;
-  --border:   #e4dff2;
-  --text:     #1a1a2e;
-  --muted:    #8e8aa8;
-  --accent:   #5a7fd4;
-  --rose:     #cc7a9e;
-  --tag-bg:   #f0ecf8;
-  --tag-fg:   #4e6ec0;
-  --nav-bg:   rgba(250,249,252,0.9);
-  --sh:       0 1px 3px rgba(60,80,160,0.05), 0 4px 16px rgba(60,80,160,0.06);
-  --sh-up:    0 2px 8px rgba(60,80,160,0.08), 0 12px 32px rgba(60,80,160,0.1);
-}
-[data-theme=dark] {
-  --bg:       #10101c;
-  --surface:  #181828;
-  --border:   #252340;
-  --text:     #e4e2f4;
-  --muted:    #7068a0;
-  --accent:   #7fa8e8;
-  --rose:     #e090b8;
-  --tag-bg:   #1c1a32;
-  --tag-fg:   #88aae0;
-  --nav-bg:   rgba(16,16,28,0.92);
-  --sh:       0 1px 3px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
-  --sh-up:    0 2px 8px rgba(0,0,0,0.3), 0 12px 32px rgba(100,130,220,0.12);
-}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xuanlang Dai</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23e8a6c8'/><rect x='6' y='6' width='5' height='19' rx='2' fill='%23100b16'/><rect x='6' y='20' width='17' height='5' rx='2' fill='%23100b16'/><circle cx='23' cy='10' r='4' fill='%23e6c56e'/></svg>"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    />
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <style>
+      :root {
+        --bg: #100b16;
+        --bg-grid: rgba(232, 166, 200, 0.045);
+        --panel: #181020;
+        --panel-2: #21172b;
+        --panel-3: #120d19;
+        --line: #34253f;
+        --line-strong: #5d4668;
+        --text: #f3edf5;
+        --muted: #b8a9c1;
+        --green: #e8a6c8;
+        --green-soft: rgba(232, 166, 200, 0.13);
+        --cyan: #a7b3e8;
+        --cyan-soft: rgba(167, 179, 232, 0.11);
+        --amber: #e6c56e;
+        --amber-soft: rgba(230, 197, 110, 0.12);
+        --rose: #d982ad;
+        --rose-soft: rgba(217, 130, 173, 0.12);
+        --shadow: 0 24px 80px rgba(6, 2, 12, 0.55);
+        --mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+        --sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
 
-html { scroll-behavior: smooth; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
 
-body {
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  transition: background .3s, color .3s;
-  -webkit-font-smoothing: antialiased;
-}
+      html {
+        scroll-behavior: smooth;
+      }
 
-/* ─── NAV ─── */
-nav {
-  position: sticky; top: 0; z-index: 99;
-  background: var(--nav-bg);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  height: 52px;
-  display: flex; align-items: center;
-  padding: 0 max(1.5rem, calc(50vw - 640px));
-  gap: 2.5rem;
-}
-.nav-name {
-  font-family: 'EB Garamond', serif;
-  font-size: 1.05rem; font-weight: 500;
-  color: var(--text); text-decoration: none;
-  margin-right: auto;
-  display: flex; align-items: center; gap: 6px;
-}
-.nav-name .dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 6px var(--accent);
-}
-nav a.link {
-  font-size: 0.88rem; font-weight: 400; letter-spacing: 0.03em;
-  color: var(--muted); text-decoration: none;
-  transition: color .2s;
-}
-nav a.link:hover { color: var(--accent); }
-.theme-btn {
-  width: 30px; height: 30px; border-radius: 50%;
-  border: 1px solid var(--border); background: transparent;
-  color: var(--muted); cursor: pointer; font-size: 0.9rem;
-  display: flex; align-items: center; justify-content: center;
-  transition: border-color .2s, color .2s;
-}
-.theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        background-color: var(--bg);
+        background-image: linear-gradient(var(--bg-grid) 1px, transparent 1px),
+          linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+        background-size: 28px 28px;
+        color: var(--text);
+        font-family: var(--sans);
+        line-height: 1.6;
+        transition: background-color 0.2s, color 0.2s;
+        -webkit-font-smoothing: antialiased;
+      }
 
-/* ─── PAGE ─── */
-.wrap {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2.5rem 2rem 4rem;
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  grid-template-rows: auto 1fr;
-  column-gap: 3rem;
-  row-gap: 0;
-}
+      a {
+        color: inherit;
+      }
 
-/* ─── HERO (spans full width) ─── */
-.hero {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: flex-end;
-  gap: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 2rem;
-}
-.hero-photo {
-  flex-shrink: 0;
-  width: 130px; height: 130px; border-radius: 50%;
-  background: var(--tag-bg);
-  border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 3rem;
-  position: relative;
-  overflow: hidden;
-}
-.hero-photo img {
-  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
-}
-/* subtle glow ring */
-.hero-photo::after {
-  content: '';
-  position: absolute; inset: -3px;
-  border-radius: 50%;
-  background: conic-gradient(var(--accent) 0%, var(--rose) 50%, transparent 65%);
-  z-index: -1;
-  opacity: 0.5;
-}
-.hero-text { flex: 1; }
-.hero-name {
-  font-family: 'EB Garamond', serif;
-  font-size: 2.6rem; font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  margin-bottom: 0.35rem;
-}
-.hero-name em {
-  font-style: italic; color: var(--muted);
-  font-size: 1.65rem; margin-left: 0.4rem;
-}
-.hero-affil {
-  font-size: 0.95rem; color: var(--muted);
-  line-height: 1.8; margin-bottom: 1.1rem;
-}
-.hero-affil strong { color: var(--text); font-weight: 500; }
-.hero-links {
-  display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
-}
-.hl {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 0.78rem; font-weight: 500;
-  padding: 5px 13px; border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--surface); color: var(--muted);
-  text-decoration: none; transition: all .18s;
-}
-.hl:hover { border-color: var(--accent); color: var(--accent); background: var(--tag-bg); }
-.hl.primary {
-  background: var(--accent); color: #fff; border-color: var(--accent);
-}
-.hl.primary:hover { opacity: 0.85; }
+      button,
+      input {
+        font: inherit;
+      }
 
-/* ─── SIDEBAR ─── */
-.sidebar {
-  grid-column: 1;
-  position: sticky; top: 68px;
-  align-self: start;
-  display: flex; flex-direction: column; gap: 2.2rem;
-}
+      button {
+        cursor: pointer;
+      }
 
-.side-section {}
-.side-label {
-  font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--muted);
-  margin-bottom: 0.8rem;
-}
-.side-items { display: flex; flex-direction: column; gap: 0.45rem; }
-.side-item {
-  font-size: 0.9rem; color: var(--muted);
-  display: flex; align-items: baseline; gap: 0.5rem;
-  line-height: 1.5;
-}
-.side-item a { color: var(--muted); text-decoration: none; transition: color .15s; }
-.side-item a:hover { color: var(--accent); }
-.side-item .si-dot {
-  flex-shrink: 0; width: 3px; height: 3px;
-  background: var(--accent); border-radius: 50%; margin-top: 8px;
-}
+      .shell-page {
+        width: min(1400px, calc(100% - 32px));
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 20px 0 24px;
+      }
 
-/* satone quote — the ONE visible easter egg, tasteful */
-.satone-aside {
-  border-left: 2px solid var(--border);
-  padding-left: 0.9rem;
-  margin-top: 0.5rem;
-}
-.satone-aside blockquote {
-  font-family: 'EB Garamond', serif;
-  font-style: italic;
-  font-size: 0.82rem;
-  color: var(--muted);
-  line-height: 1.6;
-}
-.satone-aside cite {
-  display: block; margin-top: 0.4rem;
-  font-style: normal; font-size: 0.7rem;
-  color: var(--rose); letter-spacing: 0.04em;
-}
+      .topbar {
+        height: 48px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 14px;
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        background: color-mix(in srgb, var(--panel) 86%, transparent);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(14px);
+      }
 
-/* ─── CONTENT ─── */
-.content {
-  grid-column: 2;
-  display: flex; flex-direction: column; gap: 2rem;
-}
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        margin-right: auto;
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 0.92rem;
+        font-weight: 700;
+        text-decoration: none;
+        white-space: nowrap;
+      }
 
-/* section */
-.section {}
-.sec-head {
-  font-family: 'EB Garamond', serif;
-  font-size: 1.25rem; font-weight: 500;
-  color: var(--text); letter-spacing: 0.01em;
-  margin-bottom: 1.4rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-}
-.sec-head a {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.75rem; font-weight: 400;
-  color: var(--muted); text-decoration: none;
-  transition: color .15s;
-}
-.sec-head a:hover { color: var(--accent); }
+      .brand-mark {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 18px var(--green);
+      }
 
-/* bio */
-.bio { font-size: 0.97rem; line-height: 1.85; color: var(--text); }
-.bio p + p { margin-top: 0.9rem; }
-.bio a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .15s; }
-.bio a:hover { border-color: var(--accent); }
-.bio strong { font-weight: 500; }
-.interests {
-  display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.1rem;
-}
-.chip {
-  font-size: 0.75rem; padding: 3px 11px; border-radius: 4px;
-  background: var(--tag-bg); color: var(--tag-fg);
-  border: 1px solid var(--border); font-weight: 400;
-}
+      .top-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
 
-/* news */
-.news-row {
-  display: grid;
-  grid-template-columns: 72px 1fr;
-  gap: 0.5rem 1.2rem;
-  align-items: baseline;
-  padding: 0.65rem 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 0.94rem;
-}
-.news-row:last-child { border-bottom: none; }
-.news-row:first-child { padding-top: 0; }
-.ndate {
-  font-family: 'EB Garamond', serif;
-  font-style: italic; font-size: 0.82rem;
-  color: var(--muted); white-space: nowrap;
-}
-.ntext { color: var(--text); line-height: 1.6; }
-.ntext strong { font-weight: 500; color: var(--accent); }
-.nbadge {
-  display: inline-block; font-size: 0.68rem; font-weight: 500;
-  padding: 1px 7px; border-radius: 3px;
-  background: var(--tag-bg); color: var(--tag-fg);
-  margin-right: 5px; letter-spacing: 0.02em; vertical-align: 1px;
-}
+      .top-link {
+        height: 30px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--panel-2);
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        text-decoration: none;
+        transition: border-color 0.16s, color 0.16s, background 0.16s;
+      }
 
-/* publications */
-.pub {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 1.6rem;
-  padding: 0.9rem 0;
-  border-bottom: 1px solid var(--border);
-}
-.pub:first-child { padding-top: 0; }
-.pub:last-child { border-bottom: none; }
-.pub-img {
-  width: 220px; height: 165px; border-radius: 8px;
-  background: var(--tag-bg); border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.5rem; flex-shrink: 0; align-self: start;
-  overflow: hidden;
-}
-.pub-img img { width: 100%; height: 100%; object-fit: contain; }
-.pub-body {}
-.pub-title {
-  font-size: 0.97rem; font-weight: 500; line-height: 1.5;
-  color: var(--text); margin-bottom: 0.25rem;
-}
-.pub-authors {
-  font-size: 0.84rem; color: var(--muted); margin-bottom: 0.2rem;
-}
-.pub-authors .me {
-  color: var(--text); font-weight: 500;
-  border-bottom: 1px solid var(--border);
-}
-.pub-venue {
-  font-family: 'EB Garamond', serif;
-  font-style: italic; font-size: 0.88rem;
-  color: var(--muted); margin-bottom: 0.6rem;
-}
-.pub-venue .vbadge {
-  font-style: normal; font-family: 'Inter', sans-serif;
-  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em;
-  padding: 1px 7px; border-radius: 3px;
-  background: var(--accent); color: #fff;
-  margin-right: 6px; vertical-align: 1px;
-}
-.pub-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-.pa {
-  font-size: 0.8rem; padding: 4px 11px; border-radius: 4px;
-  border: 1px solid var(--border); background: var(--surface);
-  color: var(--muted); text-decoration: none; transition: all .15s;
-}
-.pa:hover { border-color: var(--accent); color: var(--accent); }
+      .top-link:hover {
+        border-color: var(--green);
+        background: var(--green-soft);
+        color: var(--green);
+      }
 
-/* experience */
-.exp-grid {
-  display: flex; flex-direction: column; gap: 0;
-}
-.exp-row {
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 0.5rem 1.4rem;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid var(--border);
-  align-items: baseline;
-}
-.exp-row:last-child { border-bottom: none; }
-.exp-row:first-child { padding-top: 0; }
-.exp-yr {
-  font-family: 'EB Garamond', serif;
-  font-style: italic; font-size: 0.82rem;
-  color: var(--muted); white-space: nowrap;
-}
-.exp-body {}
-.exp-title {
-  font-size: 0.95rem; font-weight: 500; color: var(--text);
-}
-.exp-org {
-  font-size: 0.87rem; color: var(--accent);
-}
+      .desktop {
+        display: grid;
+        grid-template-columns: 318px minmax(0, 1fr);
+        gap: 14px;
+        align-items: stretch;
+      }
 
-/* ─── FOOTER ─── */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 1.8rem max(1.5rem, calc(50vw - 640px));
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 0.5rem;
-}
-footer span { font-size: 0.75rem; color: var(--muted); }
-footer a { color: var(--muted); text-decoration: none; transition: color .15s; }
-footer a:hover { color: var(--accent); }
-.footer-star {
-  font-size: 0.7rem; color: var(--rose); letter-spacing: 0.06em; opacity: 0.7;
-}
+      .side-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
 
-/* ─── RESPONSIVE ─── */
-@media (max-width: 720px) {
-  .wrap { grid-template-columns: 1fr; column-gap: 0; padding: 2rem 1.2rem 4rem; }
-  .hero { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-  .sidebar { position: static; grid-column: 1; }
-  .content { grid-column: 1; }
-  .pub { grid-template-columns: 1fr; }
-  .pub-img { display: none; }
-}
+      .panel,
+      .terminal-window {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        background: color-mix(in srgb, var(--panel) 92%, transparent);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
 
-/* ─── FADE IN ─── */
-@keyframes up { from { opacity:0; transform:translateY(14px) } to { opacity:1; transform:none } }
-.hero    { animation: up .5s ease both; }
-.sidebar { animation: up .5s .08s ease both; }
-.content { animation: up .5s .14s ease both; }
-</style>
-</head>
-<body>
+      .profile-panel {
+        padding: 0;
+      }
 
-<!-- NAV -->
-<nav>
-  <a class="nav-name" href="#">
-    <span class="dot"></span> Xuanlang Dai
-  </a>
-  <a class="link" href="#about">About</a>
-  <a class="link" href="#news">News</a>
-  <a class="link" href="#publications">Publications</a>
-  <a class="link" href="#projects">Projects</a>
-  <a class="link" href="#experience">Experience</a>
-  <button class="theme-btn" id="tbtn" onclick="toggleTheme()" title="Toggle theme">○</button>
-</nav>
+      .profile-content {
+        padding: 18px;
+      }
 
-<div class="wrap">
+      .profile-head {
+        display: grid;
+        grid-template-columns: 78px 1fr;
+        gap: 14px;
+        align-items: center;
+      }
 
-  <!-- ── HERO ── -->
-  <header class="hero">
-    <div class="hero-photo">
-      <img src="image/icon.jpg" alt="Xuanlang Dai"/>
-    </div>
-    <div class="hero-text">
-      <h1 class="hero-name">
-        Xuanlang Dai <em>戴煊朗</em>
-      </h1>
-      <p class="hero-affil">
-        Incoming PhD · <strong>Fudan University</strong> &amp; <strong>Shanghai AI Laboratory</strong><br/>
-        B.Eng. Computer Science · <strong>Xi'an Jiaotong University</strong>
-      </p>
-      <div class="hero-links">
-        <a class="hl primary" href="/cdn-cgi/l/email-protection#d3b7b2baaba6b2bdbfb2bdb4e4e4e493b4beb2babffdb0bcbe">
-          <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M2 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4zm2 0v.511l6 4.5 6-4.5V4H4zm0 2.489V16h12V6.489l-6 4.5-6-4.5z"/></svg>
-          Email
+      .avatar {
+        width: 78px;
+        height: 78px;
+        overflow: hidden;
+        border: 1px solid var(--line-strong);
+        border-radius: 8px;
+        background: var(--panel-2);
+      }
+
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      .profile-kicker {
+        color: var(--green);
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+
+      .profile-name {
+        margin: 2px 0 0;
+        color: var(--text);
+        font-size: 1.25rem;
+        line-height: 1.15;
+      }
+
+      .profile-name span {
+        color: var(--muted);
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+
+      .profile-meta {
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .profile-meta strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .status-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1px;
+        border-top: 1px solid var(--line);
+        background: var(--line);
+      }
+
+      .status-row {
+        display: grid;
+        grid-template-columns: 86px 1fr;
+        gap: 10px;
+        padding: 10px 14px;
+        background: var(--panel);
+        font-size: 0.82rem;
+      }
+
+      .status-key {
+        color: var(--amber);
+        font-family: var(--mono);
+      }
+
+      .status-value {
+        color: var(--text);
+      }
+
+      .panel-header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: 34px;
+        padding: 9px 12px 9px 58px;
+        border-bottom: 1px solid var(--line);
+        background: linear-gradient(180deg, color-mix(in srgb, var(--panel-2) 86%, var(--line)), var(--panel-2));
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.77rem;
+      }
+
+      .panel-header::before {
+        content: "";
+        position: absolute;
+        left: 13px;
+        top: 50%;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--rose);
+        box-shadow: 13px 0 0 var(--amber), 26px 0 0 var(--green);
+        transform: translateY(-50%);
+      }
+
+      .panel-header span:first-child {
+        color: var(--text);
+      }
+
+      .command-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 12px;
+      }
+
+      .cmd-button {
+        min-height: 38px;
+        padding: 0 10px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--panel-3);
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        text-align: left;
+        transition: transform 0.16s, border-color 0.16s, color 0.16s, background 0.16s;
+      }
+
+      .cmd-button:hover {
+        transform: translateY(-1px);
+        border-color: var(--cyan);
+        background: var(--cyan-soft);
+        color: var(--cyan);
+      }
+
+      .tree {
+        padding: 12px;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.8rem;
+      }
+
+      .tree div {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        min-height: 24px;
+      }
+
+      .tree a {
+        color: var(--text);
+        text-decoration: none;
+      }
+
+      .tree a:hover {
+        color: var(--green);
+      }
+
+      .tree .branch {
+        color: var(--green);
+      }
+
+      .tree .leaf {
+        color: var(--cyan);
+      }
+
+      .quote {
+        margin: 0;
+        padding: 14px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.78rem;
+      }
+
+      .blog-spotlight {
+        padding: 0;
+      }
+
+      .blog-inner {
+        padding: 14px;
+      }
+
+      .blog-label {
+        color: var(--amber);
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .blog-title {
+        margin: 8px 0 6px;
+        color: var(--text);
+        font-size: 1rem;
+        line-height: 1.35;
+      }
+
+      .blog-copy {
+        margin: 0 0 12px;
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+
+      .blog-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .blog-cta {
+        display: inline-flex;
+        align-items: center;
+        min-height: 32px;
+        padding: 0 10px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--rose-soft);
+        color: var(--green);
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        text-decoration: none;
+        transition: border-color 0.16s, background 0.16s, color 0.16s;
+      }
+
+      .blog-cta:hover {
+        border-color: var(--green);
+        background: var(--green-soft);
+        color: var(--text);
+      }
+
+      .terminal-window {
+        height: calc(100vh - 106px);
+        min-height: 680px;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+      }
+
+      .window-bar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 42px;
+        padding: 0 12px;
+        border-bottom: 1px solid var(--line);
+        background: var(--panel-2);
+      }
+
+      .window-controls {
+        display: flex;
+        gap: 7px;
+      }
+
+      .control {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .control.red {
+        background: var(--rose);
+      }
+
+      .control.yellow {
+        background: var(--amber);
+      }
+
+      .control.green {
+        background: var(--green);
+      }
+
+      .window-title {
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        white-space: nowrap;
+      }
+
+      .terminal-output {
+        overflow: auto;
+        padding: 18px;
+        scroll-behavior: smooth;
+      }
+
+      .terminal-block {
+        margin: 0 0 20px;
+      }
+
+      .terminal-line {
+        display: flex;
+        align-items: baseline;
+        gap: 9px;
+        min-height: 26px;
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 0.9rem;
+      }
+
+      .prompt {
+        flex: 0 0 auto;
+        color: var(--green);
+        font-family: var(--mono);
+        font-weight: 700;
+      }
+
+      .command {
+        color: var(--text);
+      }
+
+      .output {
+        margin-top: 8px;
+        padding-left: 18px;
+        border-left: 1px solid var(--line);
+      }
+
+      .output p {
+        margin: 0 0 10px;
+        color: var(--text);
+        font-size: 0.94rem;
+      }
+
+      .output p:last-child {
+        margin-bottom: 0;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .green {
+        color: var(--green);
+      }
+
+      .cyan {
+        color: var(--cyan);
+      }
+
+      .amber {
+        color: var(--amber);
+      }
+
+      .rose {
+        color: var(--rose);
+      }
+
+      .ascii {
+        margin: 0 0 12px;
+        color: var(--green);
+        font-family: var(--mono);
+        font-size: clamp(0.48rem, 1vw, 0.82rem);
+        line-height: 1.18;
+        white-space: pre;
+      }
+
+      .command-table {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .command-row {
+        display: grid;
+        grid-template-columns: 102px 1fr;
+        gap: 10px;
+        padding: 9px 10px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--panel-3);
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .command-row code {
+        color: var(--green);
+        font-family: var(--mono);
+        font-size: 0.8rem;
+      }
+
+      .terminal-guide {
+        margin-top: 14px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: linear-gradient(135deg, var(--green-soft), var(--cyan-soft)), var(--panel-3);
+      }
+
+      .guide-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 10px;
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 0.82rem;
+      }
+
+      .guide-head span:last-child {
+        color: var(--muted);
+        font-size: 0.74rem;
+      }
+
+      .guide-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .guide-action {
+        min-height: 34px;
+        padding: 0 9px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--panel);
+        background: color-mix(in srgb, var(--panel) 82%, transparent);
+        color: var(--cyan);
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        text-align: left;
+        transition: border-color 0.16s, background 0.16s, color 0.16s, transform 0.16s;
+      }
+
+      .guide-action:hover {
+        transform: translateY(-1px);
+        border-color: var(--green);
+        background: var(--green-soft);
+        color: var(--text);
+      }
+
+      .guide-tip {
+        margin-top: 10px;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.76rem;
+      }
+
+      .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .tag {
+        padding: 3px 9px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--green-soft);
+        color: var(--green);
+        font-family: var(--mono);
+        font-size: 0.74rem;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 8px;
+      }
+
+      .timeline-row {
+        display: grid;
+        grid-template-columns: 86px 1fr;
+        gap: 12px;
+        padding: 9px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .timeline-row:last-child {
+        border-bottom: 0;
+      }
+
+      .time {
+        color: var(--amber);
+        font-family: var(--mono);
+        font-size: 0.82rem;
+      }
+
+      .entry-title {
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      .entry-subtitle {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .link-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+      }
+
+      .terminal-link,
+      .media-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 32px;
+        padding: 0 10px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--panel-3);
+        color: var(--cyan);
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        text-decoration: none;
+        transition: border-color 0.16s, background 0.16s, color 0.16s;
+      }
+
+      .terminal-link:hover,
+      .media-link:hover {
+        border-color: var(--cyan);
+        background: var(--cyan-soft);
+        color: var(--text);
+      }
+
+      .media-item {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 16px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel-3);
+      }
+
+      .media-item + .media-item {
+        margin-top: 12px;
+      }
+
+      .media-thumb {
+        min-height: 148px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--panel);
+      }
+
+      .media-thumb img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: contain;
+      }
+
+      .media-title {
+        margin: 0 0 6px;
+        color: var(--text);
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+
+      .media-meta {
+        margin: 0 0 8px;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .media-meta strong {
+        color: var(--text);
+      }
+
+      .media-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .terminal-input {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 9px;
+        align-items: center;
+        padding: 12px 18px;
+        border-top: 1px solid var(--line-strong);
+        background: var(--panel-2);
+        transition: background 0.16s, box-shadow 0.16s, border-color 0.16s;
+      }
+
+      .command-field {
+        position: relative;
+        min-width: 0;
+        display: grid;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .command-caret-layer {
+        grid-area: 1 / 1;
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        min-width: 0;
+        overflow: hidden;
+        color: transparent;
+        font-family: var(--mono);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        pointer-events: none;
+        transform: translateX(var(--command-scroll, 0px));
+        white-space: pre;
+      }
+
+      .command-measure {
+        flex: 0 0 auto;
+        visibility: hidden;
+        white-space: pre;
+      }
+
+      .command-caret {
+        flex: 0 0 auto;
+        width: 2px;
+        height: 1.25em;
+        margin-left: 2px;
+        border-radius: 999px;
+        background: var(--green);
+        box-shadow: 0 0 10px rgba(232, 166, 200, 0.75);
+        animation: caret-blink 1.05s step-end infinite;
+      }
+
+      .terminal-input:not(:focus-within) .command-caret {
+        opacity: 0;
+      }
+
+      .terminal-input:focus-within {
+        border-color: var(--green);
+        background: color-mix(in srgb, var(--panel-2) 82%, var(--green-soft));
+        box-shadow: inset 0 1px 0 var(--green-soft), 0 -10px 28px rgba(232, 166, 200, 0.08);
+      }
+
+      .command-input {
+        grid-area: 1 / 1;
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        min-width: 0;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        color: var(--text);
+        caret-color: transparent;
+        font-family: var(--mono);
+        font-size: 0.95rem;
+      }
+
+      .command-input::placeholder {
+        color: color-mix(in srgb, var(--muted) 72%, transparent);
+      }
+
+      @keyframes caret-blink {
+        0%,
+        52% {
+          opacity: 1;
+        }
+
+        53%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .statusbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 14px;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.76rem;
+      }
+
+      .statusbar a {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .statusbar a:hover {
+        color: var(--green);
+      }
+
+      @media (max-width: 980px) {
+        .shell-page {
+          width: min(100% - 24px, 760px);
+          padding-top: 12px;
+        }
+
+        .topbar {
+          height: auto;
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 12px;
+        }
+
+        .top-actions {
+          width: 100%;
+          overflow-x: auto;
+          padding-bottom: 2px;
+        }
+
+        .desktop {
+          grid-template-columns: 1fr;
+        }
+
+        .terminal-window {
+          height: 72vh;
+          min-height: 560px;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .command-grid,
+        .command-table,
+        .guide-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .profile-head,
+        .media-item,
+        .timeline-row {
+          grid-template-columns: 1fr;
+        }
+
+        .media-thumb {
+          min-height: 180px;
+        }
+
+        .terminal-output {
+          padding: 14px;
+        }
+
+        .output {
+          padding-left: 12px;
+        }
+
+        .terminal-input {
+          grid-template-columns: 1fr;
+        }
+
+        .terminal-input .prompt {
+          grid-column: 1 / -1;
+        }
+
+        .command-field {
+          grid-column: 1;
+        }
+
+        .statusbar {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="shell-page">
+      <header class="topbar">
+        <a class="brand" href="#">
+          <span class="brand-mark"></span>
+          xuanlang@homepage:~
         </a>
-        <a class="hl" href="https://github.com/LennoxDai" target="_blank">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
-          GitHub
-        </a>
-        <a class="hl" href="https://scholar.google.com/citations?user=OeeH1HAAAAAJ&hl=en" target="_blank">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
-          Scholar
-        </a>
-        <a class="hl" href="https://huggingface.co/XuanlangDai" target="_blank">🤗 Hugging Face</a>
-        <a class="hl" href="https://lennox-dai-github-io.vercel.app" target="_blank">Blog</a>
+
+        <nav class="top-actions" aria-label="Primary">
+          <button class="top-link" type="button" data-command="whoami">whoami</button>
+          <button class="top-link" type="button" data-command="papers">papers</button>
+          <button class="top-link" type="button" data-command="reports">reports</button>
+          <button class="top-link" type="button" data-command="projects">projects</button>
+          <a class="top-link" href="blog/index.html">blog</a>
+          <button class="top-link" type="button" data-command="cv">cv</button>
+          <a class="top-link" href="https://github.com/LennoxDai" target="_blank" rel="noreferrer">github</a>
+        </nav>
+      </header>
+
+      <main class="desktop">
+        <aside class="side-stack" aria-label="Profile">
+          <section class="panel profile-panel">
+            <div class="panel-header">
+              <span>~/profile</span>
+              <span>user</span>
+            </div>
+            <div class="profile-content">
+              <div class="profile-head">
+                <div class="avatar">
+                  <img src="image/icon.jpg" alt="Xuanlang Dai" />
+                </div>
+                <div>
+                  <div class="profile-kicker">/home/profile</div>
+                  <h1 class="profile-name">Xuanlang Dai <span>戴煊朗</span></h1>
+                </div>
+              </div>
+              <p class="profile-meta">
+                Incoming PhD at <strong>Fudan University</strong> and <strong>Shanghai AI Laboratory</strong>. NLP, multimodal learning, LLMs, and
+                vision-language models.
+              </p>
+            </div>
+          </section>
+
+          <section class="panel blog-spotlight">
+            <div class="panel-header">
+              <span>~/blog</span>
+              <span>featured</span>
+            </div>
+            <div class="blog-inner">
+              <div class="blog-label">featured blog</div>
+              <h2 class="blog-title">Diffusion Model 简单介绍</h2>
+              <p class="blog-copy">Markdown rendered reading page, with PDF as an extra link.</p>
+              <div class="blog-actions">
+                <a class="blog-cta" href="blog/1/index.html">read md</a>
+                <a class="blog-cta" href="blog/1/1.pdf" target="_blank" rel="noreferrer">pdf</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <span>~/status</span>
+              <span>live</span>
+            </div>
+            <div class="status-grid">
+              <div class="status-row">
+                <span class="status-key">status</span>
+                <span class="status-value">Research Intern</span>
+              </div>
+              <div class="status-row">
+                <span class="status-key">lab</span>
+                <span class="status-value">Shanghai AI Laboratory</span>
+              </div>
+              <div class="status-row">
+                <span class="status-key">phd</span>
+                <span class="status-value">Fudan University, Fall 2026</span>
+              </div>
+              <div class="status-row">
+                <span class="status-key">focus</span>
+                <span class="status-value">NLP / Multimodal Reasoning</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <span>~/commands</span>
+              <span>exec</span>
+            </div>
+            <div class="command-grid">
+              <button class="cmd-button" type="button" data-command="whoami">whoami</button>
+              <button class="cmd-button" type="button" data-command="news">news</button>
+              <button class="cmd-button" type="button" data-command="papers">papers</button>
+              <button class="cmd-button" type="button" data-command="reports">reports</button>
+              <button class="cmd-button" type="button" data-command="projects">projects</button>
+              <button class="cmd-button" type="button" data-command="blog">blog</button>
+              <button class="cmd-button" type="button" data-command="cv">cv</button>
+              <button class="cmd-button" type="button" data-command="links">links</button>
+              <button class="cmd-button" type="button" data-command="help">help</button>
+              <button class="cmd-button" type="button" data-command="clear">clear</button>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <span>~/links</span>
+              <span>net</span>
+            </div>
+            <div class="tree">
+              <div><span class="branch">.</span></div>
+              <div><span class="branch">├─</span><a href="/cdn-cgi/l/email-protection#d3b7b2baaba6b2bdbfb2bdb4e4e4e493b4beb2babffdb0bcbe">email</a></div>
+              <div><span class="branch">├─</span><a href="https://github.com/LennoxDai" target="_blank" rel="noreferrer">github</a></div>
+              <div><span class="branch">├─</span><a href="https://scholar.google.com/citations?user=OeeH1HAAAAAJ&hl=en" target="_blank" rel="noreferrer">scholar</a></div>
+              <div><span class="branch">├─</span><a href="https://huggingface.co/XuanlangDai" target="_blank" rel="noreferrer">huggingface</a></div>
+              <div><span class="branch">└─</span><a href="blog/index.html">blog</a></div>
+            </div>
+            <blockquote class="quote">"The laws I must follow in order to keep going."</blockquote>
+          </section>
+        </aside>
+
+        <section class="terminal-window" aria-label="Interactive terminal">
+          <div class="window-bar">
+            <div class="window-controls" aria-hidden="true">
+              <span class="control red"></span>
+              <span class="control yellow"></span>
+              <span class="control green"></span>
+            </div>
+            <div class="window-title">bash - xuanlang-dai/homepage</div>
+          </div>
+
+          <div class="terminal-output" id="terminalOutput" tabindex="0">
+            <section class="terminal-block">
+              <div class="terminal-line">
+                <span class="prompt">xuanlang@lab:~$</span>
+                <span class="command">whoami</span>
+              </div>
+              <div class="output">
+                <pre class="ascii">__  __                 _                    ____        _
+\ \/ /_   _  __ _ _ __ | | __ _ _ __   __ _ |  _ \  __ _(_)
+ \  /| | | |/ _` | '_ \| |/ _` | '_ \ / _` || | | |/ _` | |
+ /  \| |_| | (_| | | | | | (_| | | | | (_| || |_| | (_| | |
+/_/\_\\__,_|\__,_|_| |_|_|\__,_|_| |_|\__, ||____/ \__,_|_|
+                                      |___/</pre>
+                <p>
+                  <span class="green">Xuanlang Dai</span> is an incoming PhD student at <strong>Fudan University</strong> and
+                  <strong>Shanghai AI Laboratory</strong>, advised by Prof.
+                  <a class="terminal-link" href="https://yuhangzang.github.io/" target="_blank" rel="noreferrer">Yuhang Zang</a>.
+                </p>
+                <p>
+                  He works on <span class="cyan">Natural Language Processing</span> and <span class="cyan">Multimodal Learning</span>, with interest
+                  in large language models, vision-language models, and reasoning.
+                </p>
+                <div class="tag-list">
+                  <span class="tag">NLP</span>
+                  <span class="tag">Multimodal Learning</span>
+                  <span class="tag">LLMs</span>
+                  <span class="tag">Vision-Language Models</span>
+                  <span class="tag">Reasoning</span>
+                </div>
+                <div class="terminal-guide">
+                  <div class="guide-head">
+                    <span>quickstart</span>
+                    <span>type a command or click one below</span>
+                  </div>
+                  <div class="guide-grid">
+                    <button class="guide-action" type="button" data-command="help">help</button>
+                    <button class="guide-action" type="button" data-command="blog">blog</button>
+                    <button class="guide-action" type="button" data-command="papers">papers</button>
+                    <button class="guide-action" type="button" data-command="reports">reports</button>
+                  </div>
+                  <div class="guide-tip">tips: use ↑/↓ for command history, try <span class="green">open diffusion</span> for the rendered Markdown blog.</div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <form class="terminal-input" id="terminalForm">
+            <label class="prompt" for="commandInput">xuanlang@lab:~$</label>
+            <div class="command-field" id="commandField">
+              <input
+                class="command-input"
+                id="commandInput"
+                name="command"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="type help, blog, papers, reports, projects, cv, links..."
+              />
+              <span class="command-caret-layer" aria-hidden="true">
+                <span class="command-measure" id="commandMirror"></span>
+                <span class="command-caret"></span>
+              </span>
+            </div>
+          </form>
+        </section>
+      </main>
+
+      <footer class="statusbar">
+        <span>© 2026 Xuanlang Dai</span>
+        <span><a href="blog/index.html">blog</a> / <a href="https://github.com/LennoxDai" target="_blank" rel="noreferrer">github</a></span>
+      </footer>
+    </div>
+
+    <template id="tpl-help">
+      <div class="output">
+        <div class="command-table">
+          <div class="command-row"><code>whoami</code><span>profile and research focus</span></div>
+          <div class="command-row"><code>news</code><span>latest academic status</span></div>
+          <div class="command-row"><code>papers</code><span>selected publication</span></div>
+          <div class="command-row"><code>reports</code><span>technical reports</span></div>
+          <div class="command-row"><code>projects</code><span>selected project</span></div>
+          <div class="command-row"><code>blog</code><span>rendered Markdown notes</span></div>
+          <div class="command-row"><code>cv</code><span>experience timeline</span></div>
+          <div class="command-row"><code>links</code><span>external links and contact</span></div>
+          <div class="command-row"><code>open diffusion</code><span>open the blog post</span></div>
+          <div class="command-row"><code>open github</code><span>open a link target</span></div>
+          <div class="command-row"><code>clear</code><span>clear terminal buffer</span></div>
+        </div>
       </div>
-    </div>
-  </header>
+    </template>
 
-  <!-- ── SIDEBAR ── -->
-  <aside class="sidebar">
-
-    <div class="side-section">
-      <div class="side-label">Research</div>
-      <div class="side-items">
-        <div class="side-item"><span class="si-dot"></span>NLP</div>
-        <div class="side-item"><span class="si-dot"></span>Multimodal Learning</div>
-        <div class="side-item"><span class="si-dot"></span>Large Language Models</div>
-        <div class="side-item"><span class="si-dot"></span>Vision-Language Models</div>
-      </div>
-    </div>
-
-    <div class="side-section">
-      <div class="side-label">Links</div>
-      <div class="side-items">
-        <div class="side-item"><span class="si-dot"></span><a href="https://github.com/LennoxDai" target="_blank">GitHub</a></div>
-        <div class="side-item"><span class="si-dot"></span><a href="https://scholar.google.com/citations?user=OeeH1HAAAAAJ&hl=en" target="_blank">Google Scholar</a></div>
-        <div class="side-item"><span class="si-dot"></span><a href="https://huggingface.co/XuanlangDai" target="_blank">Hugging Face</a></div>
-        <div class="side-item"><span class="si-dot"></span><a href="https://lennox-dai-github-io.vercel.app" target="_blank">Blog (Vitamind)</a></div>
-      </div>
-    </div>
-
-    <div class="satone-aside">
-      <blockquote>
-        "The laws I must follow in order to keep going."
-      </blockquote>
-    </div>
-
-  </aside>
-
-  <!-- ── CONTENT ── -->
-  <main class="content">
-
-    <!-- ABOUT -->
-    <section class="section" id="about">
-      <h2 class="sec-head">About</h2>
-      <div class="bio">
+    <template id="tpl-about">
+      <div class="output">
         <p>
-          I am an incoming PhD student at <strong>Fudan University</strong> and the
-          <strong>Shanghai AI Laboratory</strong>, advised by Prof. <a href="https://yuhangzang.github.io/">Yuhang Zang</a>.
-          I received my B.Eng. in Computer Science from
-          <strong>Xi'an Jiaotong University (XJTU)</strong>,
-          where I was a member of the <a href="https://luoundergradxjtu.github.io/">Luo Lab</a>.
+          I am an incoming PhD student at <strong>Fudan University</strong> and the <strong>Shanghai AI Laboratory</strong>, advised by Prof.
+          <a class="terminal-link" href="https://yuhangzang.github.io/" target="_blank" rel="noreferrer">Yuhang Zang</a>. I received my B.Eng. in
+          Computer Science from <strong>Xi'an Jiaotong University (XJTU)</strong>, where I was a member of the
+          <a class="terminal-link" href="https://luoundergradxjtu.github.io/" target="_blank" rel="noreferrer">Luo Lab</a>.
         </p>
         <p>
-          I am currently a Research Intern at the
-          <strong><a href="https://www.shlab.org.cn/">Shanghai AI Laboratory</a></strong>,
-          working with Prof. <a href="https://yuhangzang.github.io/">Yuhang Zang</a>
-          on multimodal reasoning and vision-language models.
-          I have also gained research and industry experience at
-          Westlake University, <strong>UC Berkeley</strong>, <strong>4Paradigm</strong>, and <strong>Merit Interactive</strong>.
+          I am currently a Research Intern at
+          <a class="terminal-link" href="https://www.shlab.org.cn/" target="_blank" rel="noreferrer">Shanghai AI Laboratory</a>, working on
+          multimodal reasoning and vision-language models. I have also gained research and industry experience at Westlake University,
+          <strong>UC Berkeley</strong>, <strong>4Paradigm</strong>, and <strong>Merit Interactive</strong>.
         </p>
-        <p>
-          My research focuses on <strong>Natural Language Processing</strong>
-          and <strong>Multimodal Learning</strong> — building AI systems
-          that understand and reason across language and vision.
-        </p>
-        <div class="interests">
-          <span class="chip">NLP</span>
-          <span class="chip">Multimodal Learning</span>
-          <span class="chip">LLMs</span>
-          <span class="chip">Vision-Language Models</span>
-          <span class="chip">Reasoning</span>
+        <div class="tag-list">
+          <span class="tag">NLP</span>
+          <span class="tag">Multimodal Learning</span>
+          <span class="tag">LLMs</span>
+          <span class="tag">Vision-Language Models</span>
+          <span class="tag">Reasoning</span>
         </div>
       </div>
-    </section>
+    </template>
 
-    <!-- NEWS -->
-    <section class="section" id="news">
-      <h2 class="sec-head">News</h2>
-      <div class="news-row">
-        <span class="ndate">Sep 2025</span>
-        <span class="ntext"><span class="nbadge">Intern</span>Joined <strong>Shanghai AI Laboratory</strong> as a research intern, advised by Prof. <a href="https://yuhangzang.github.io/" style="color:var(--accent)">Yuhang Zang</a>. Will start PhD at <strong>Fudan University</strong> in Fall 2026.</span>
-      </div>
-    </section>
-
-    <!-- PUBLICATIONS -->
-    <section class="section" id="publications">
-      <h2 class="sec-head">
-        Selected Publications
-        <a href="https://scholar.google.com/citations?user=OeeH1HAAAAAJ&hl=en" target="_blank">Full list on Scholar →</a>
-      </h2>
-
-      <div class="pub">
-        <div class="pub-img"><img src="image/paper/1.png" alt="EndoCoT" style="width:100%;height:100%;object-fit:contain;"/></div>
-        <div class="pub-body">
-          <div class="pub-title">EndoCoT: Scaling Endogenous Chain-of-Thought Reasoning in Diffusion Models</div>
-          <div class="pub-authors"><span class="me">Xuanlang Dai</span>, Yujie Zhou, Long Xing, Jiazi Bu, Xilin Wei, Yuhong Liu, Beichen Zhang, Kai Chen, <a href="https://yuhangzang.github.io/" style="color:var(--accent);text-decoration:none">Yuhang Zang</a></div>
-          <div class="pub-venue"><span class="vbadge">Preprint</span>arXiv, Mar 2026</div>
-          <div class="pub-actions">
-            <a class="pa" href="https://arxiv.org/abs/2603.12252" target="_blank">arXiv</a>
-            <a class="pa" href="https://huggingface.co/papers/2603.12252" target="_blank">🤗 Paper</a>
-            <a class="pa" href="https://huggingface.co/datasets/internlm/EndoCoT-Data" target="_blank">🤗 Dataset</a>
-            <a class="pa" href="https://github.com/InternLM/EndoCoT" target="_blank">GitHub</a>
+    <template id="tpl-news">
+      <div class="output">
+        <div class="timeline">
+          <div class="timeline-row">
+            <span class="time">Sep 2026</span>
+            <div>
+              <div class="entry-title"><span class="green">Intern</span> Joined Shanghai AI Laboratory</div>
+              <div class="entry-subtitle">
+                Research intern advised by Prof.
+                <a class="terminal-link" href="https://yuhangzang.github.io/" target="_blank" rel="noreferrer">Yuhang Zang</a>. Will start PhD at
+                <strong>Fudan University</strong> in Fall 2026.
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </template>
 
-    </section>
-
-    <!-- PROJECTS -->
-    <section class="section" id="projects">
-      <h2 class="sec-head">Selected Projects</h2>
-
-      <div class="pub">
-        <div class="pub-img"><img src="image/project/1.png" alt="WildClawBench" style="width:100%;height:100%;object-fit:contain;"/></div>
-        <div class="pub-body">
-          <div class="pub-title">WildClawBench</div>
-          <div class="pub-authors">An in-the-wild benchmark for AI agents in the OpenClaw Environment.</div>
-          <div class="pub-venue" style="font-style:normal;font-family:'Inter',sans-serif;font-size:0.78rem;margin-bottom:0.5rem">
-            <span class="chip" style="margin-right:4px">Benchmark</span><span class="chip">AI Agents</span>
+    <template id="tpl-papers">
+      <div class="output">
+        <div class="media-item">
+          <div class="media-thumb">
+            <img src="image/paper/1.png" alt="EndoCoT" />
           </div>
-          <div class="pub-actions">
-            <a class="pa" href="https://github.com/InternLM/WildClawBench" target="_blank">GitHub</a>
-            <a class="pa" href="https://huggingface.co/datasets/internlm/WildClawBench" target="_blank">🤗 Dataset</a>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section class="section" id="experience">
-      <h2 class="sec-head">Experience</h2>
-      <div class="exp-grid">
-        <div class="exp-row">
-          <span class="exp-yr">2026 →</span>
-          <div class="exp-body">
-            <div class="exp-title">PhD Student <span style="font-size:0.72rem;color:var(--muted);font-weight:400">(incoming)</span></div>
-            <div class="exp-org">Fudan University &amp; Shanghai AI Laboratory</div>
-          </div>
-        </div>
-        <div class="exp-row">
-          <span class="exp-yr">2025</span>
-          <div class="exp-body">
-            <div class="exp-title">Research Intern</div>
-            <div class="exp-org"><a href="https://yuhangzang.github.io/" style="color:var(--accent);text-decoration:none">Shanghai AI Laboratory</a></div>
-          </div>
-        </div>
-        <div class="exp-row">
-          <span class="exp-yr">2025</span>
-          <div class="exp-body">
-            <div class="exp-title">Research Assistant</div>
-            <div class="exp-org"><a href="https://lins-lab.github.io/" style="color:var(--accent);text-decoration:none">Westlake University LINS Lab</a></div>
-          </div>
-        </div>
-        <div class="exp-row">
-          <span class="exp-yr">2024</span>
-          <div class="exp-body">
-            <div class="exp-title">Exchange Student</div>
-            <div class="exp-org">UC Berkeley</div>
-          </div>
-        </div>
-        <div class="exp-row">
-          <span class="exp-yr">2024</span>
-          <div class="exp-body">
-            <div class="exp-title">Research Intern</div>
-            <div class="exp-org">4Paradigm, Shanghai</div>
-          </div>
-        </div>
-        <div class="exp-row">
-          <span class="exp-yr">2024</span>
-          <div class="exp-body">
-            <div class="exp-title">Software Engineering Intern</div>
-            <div class="exp-org">Merit Interactive, Hangzhou</div>
-          </div>
-        </div>
-        <div class="exp-row">
-          <span class="exp-yr">2022–25</span>
-          <div class="exp-body">
-            <div class="exp-title">Undergraduate Researcher</div>
-            <div class="exp-org"><a href="https://luoundergradxjtu.github.io/" style="color:var(--accent);text-decoration:none">XJTU Luo Lab</a></div>
+          <div>
+            <h2 class="media-title">EndoCoT: Scaling Endogenous Chain-of-Thought Reasoning in Diffusion Models</h2>
+            <p class="media-meta">
+              <strong>Xuanlang Dai</strong>, Yujie Zhou, Long Xing, Jiazi Bu, Xilin Wei, Yuhong Liu, Beichen Zhang, Kai Chen,
+              <a class="terminal-link" href="https://yuhangzang.github.io/" target="_blank" rel="noreferrer">Yuhang Zang</a>
+            </p>
+            <p class="media-meta"><span class="amber">Preprint</span> · arXiv, Mar 2026</p>
+            <div class="media-actions">
+              <a class="media-link" href="https://arxiv.org/abs/2603.12252" target="_blank" rel="noreferrer">arXiv</a>
+              <a class="media-link" href="https://huggingface.co/papers/2603.12252" target="_blank" rel="noreferrer">🤗 Paper</a>
+              <a class="media-link" href="https://huggingface.co/datasets/internlm/EndoCoT-Data" target="_blank" rel="noreferrer">🤗 Dataset</a>
+              <a class="media-link" href="https://github.com/InternLM/EndoCoT" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </template>
 
-  </main>
+    <template id="tpl-reports">
+      <div class="output">
+        <div class="media-item">
+          <div class="media-thumb">
+            <img src="image/report/1.svg" alt="Intern-S1-Pro tech report cover" />
+          </div>
+          <div>
+            <h2 class="media-title">Intern-S1-Pro: Scientific Multimodal Foundation Model at Trillion Scale</h2>
+            <p class="media-meta"><strong>Intern-S1-Pro Team</strong>, Shanghai AI Laboratory</p>
+            <p class="media-meta"><span class="amber">Tech Report</span> · 2026-4-3</p>
+            <div class="media-actions">
+              <a class="media-link" href="https://arxiv.org/abs/2603.25040" target="_blank" rel="noreferrer">arXiv</a>
+              <a class="media-link" href="https://huggingface.co/papers/2603.25040" target="_blank" rel="noreferrer">🤗 Paper</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
 
-</div>
+    <template id="tpl-projects">
+      <div class="output">
+        <div class="media-item">
+          <div class="media-thumb">
+            <img src="image/project/1.png" alt="WildClawBench" />
+          </div>
+          <div>
+            <h2 class="media-title">WildClawBench</h2>
+            <p class="media-meta">An in-the-wild benchmark for AI agents in the OpenClaw Environment.</p>
+            <div class="tag-list">
+              <span class="tag">Benchmark</span>
+              <span class="tag">AI Agents</span>
+            </div>
+            <div class="media-actions">
+              <a class="media-link" href="https://github.com/InternLM/WildClawBench" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="media-link" href="https://huggingface.co/datasets/internlm/WildClawBench" target="_blank" rel="noreferrer">🤗 Dataset</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
 
-<footer>
-  <span>© 2025 Xuanlang Dai</span>
-  <span class="footer-star">✦</span>
-  <span><a href="https://lennox-dai-github-io.vercel.app">Blog</a> &nbsp;·&nbsp; <a href="https://github.com/LennoxDai">GitHub</a></span>
-</footer>
+    <template id="tpl-blog">
+      <div class="output">
+        <div class="media-item">
+          <div class="media-thumb">
+            <img src="blog/1/image/1.png" alt="Diffusion model blog preview" />
+          </div>
+          <div>
+            <h2 class="media-title">Diffusion Model 简单介绍</h2>
+            <p class="media-meta">A Markdown-rendered introduction to DDPM, DDIM, score-based models, flow matching, CFG, acceleration, RL, caching, and related tooling.</p>
+            <p class="media-meta"><span class="amber">Blog</span> · Markdown page with PDF extra link</p>
+            <div class="media-actions">
+              <a class="media-link" href="blog/1/index.html">Read MD</a>
+              <a class="media-link" href="blog/1/1.pdf" target="_blank" rel="noreferrer">PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-function toggleTheme() {
-  const d = document.documentElement;
-  const dark = d.getAttribute('data-theme') === 'dark';
-  d.setAttribute('data-theme', dark ? 'light' : 'dark');
-  document.getElementById('tbtn').textContent = dark ? '○' : '●';
-}
-</script>
-</body>
+    <template id="tpl-cv">
+      <div class="output">
+        <div class="timeline">
+          <div class="timeline-row">
+            <span class="time">2026 →</span>
+            <div>
+              <div class="entry-title">PhD Student <span class="muted">(incoming)</span></div>
+              <div class="entry-subtitle">Fudan University &amp; Shanghai AI Laboratory</div>
+            </div>
+          </div>
+          <div class="timeline-row">
+            <span class="time">2026</span>
+            <div>
+              <div class="entry-title">Research Intern</div>
+              <div class="entry-subtitle"><a class="terminal-link" href="https://yuhangzang.github.io/" target="_blank" rel="noreferrer">Shanghai AI Laboratory</a></div>
+            </div>
+          </div>
+          <div class="timeline-row">
+            <span class="time">2026</span>
+            <div>
+              <div class="entry-title">Research Assistant</div>
+              <div class="entry-subtitle"><a class="terminal-link" href="https://lins-lab.github.io/" target="_blank" rel="noreferrer">Westlake University LINS Lab</a></div>
+            </div>
+          </div>
+          <div class="timeline-row">
+            <span class="time">2024</span>
+            <div>
+              <div class="entry-title">Exchange Student</div>
+              <div class="entry-subtitle">UC Berkeley</div>
+            </div>
+          </div>
+          <div class="timeline-row">
+            <span class="time">2024</span>
+            <div>
+              <div class="entry-title">Research Intern</div>
+              <div class="entry-subtitle">4Paradigm, Shanghai</div>
+            </div>
+          </div>
+          <div class="timeline-row">
+            <span class="time">2024</span>
+            <div>
+              <div class="entry-title">Software Engineering Intern</div>
+              <div class="entry-subtitle">Merit Interactive, Hangzhou</div>
+            </div>
+          </div>
+          <div class="timeline-row">
+            <span class="time">2022–25</span>
+            <div>
+              <div class="entry-title">Undergraduate Researcher</div>
+              <div class="entry-subtitle"><a class="terminal-link" href="https://luoundergradxjtu.github.io/" target="_blank" rel="noreferrer">XJTU Luo Lab</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <template id="tpl-links">
+      <div class="output">
+        <div class="link-list">
+          <a class="terminal-link" href="/cdn-cgi/l/email-protection#d3b7b2baaba6b2bdbfb2bdb4e4e4e493b4beb2babffdb0bcbe">Email</a>
+          <a class="terminal-link" href="https://github.com/LennoxDai" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="terminal-link" href="https://scholar.google.com/citations?user=OeeH1HAAAAAJ&hl=en" target="_blank" rel="noreferrer">Google Scholar</a>
+          <a class="terminal-link" href="https://huggingface.co/XuanlangDai" target="_blank" rel="noreferrer">Hugging Face</a>
+          <a class="terminal-link" href="blog/index.html">Blog</a>
+        </div>
+      </div>
+    </template>
+
+    <template id="tpl-unknown">
+      <div class="output">
+        <p><span class="rose">command not found</span> <span class="muted">Run</span> <span class="green">help</span> <span class="muted">or click a command in ~/commands.</span></p>
+      </div>
+    </template>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+      const output = document.getElementById("terminalOutput");
+      const form = document.getElementById("terminalForm");
+      const input = document.getElementById("commandInput");
+      const commandField = document.getElementById("commandField");
+      const commandMirror = document.getElementById("commandMirror");
+
+      const aliases = new Map([
+        ["about", "about"],
+        ["cat about.md", "about"],
+        ["whoami", "about"],
+        ["help", "help"],
+        ["guide", "help"],
+        ["intro", "help"],
+        ["start", "help"],
+        ["man", "help"],
+        ["news", "news"],
+        ["ls news", "news"],
+        ["papers", "papers"],
+        ["paper", "papers"],
+        ["publications", "papers"],
+        ["pubs", "papers"],
+        ["reports", "reports"],
+        ["report", "reports"],
+        ["tech reports", "reports"],
+        ["tech report", "reports"],
+        ["techreports", "reports"],
+        ["projects", "projects"],
+        ["project", "projects"],
+        ["blog", "blog"],
+        ["blogs", "blog"],
+        ["post", "blog"],
+        ["posts", "blog"],
+        ["diffusion", "blog"],
+        ["diffusion intro", "blog"],
+        ["cv", "cv"],
+        ["experience", "cv"],
+        ["resume", "cv"],
+        ["links", "links"],
+        ["contact", "links"],
+        ["ls", "ls"],
+        ["pwd", "pwd"],
+        ["date", "date"],
+        ["clear", "clear"],
+        ["cls", "clear"],
+      ]);
+
+      const openTargets = {
+        arxiv: "https://arxiv.org/abs/2603.12252",
+        blog: "blog/index.html",
+        dataset: "https://huggingface.co/datasets/internlm/EndoCoT-Data",
+        diffusion: "blog/1/index.html",
+        github: "https://github.com/LennoxDai",
+        huggingface: "https://huggingface.co/XuanlangDai",
+        report: "https://arxiv.org/abs/2603.25040",
+        scholar: "https://scholar.google.com/citations?user=OeeH1HAAAAAJ&hl=en",
+        wildclawbench: "https://github.com/InternLM/WildClawBench",
+      };
+
+      const history = [];
+      let historyIndex = 0;
+
+      function syncCommandCaret() {
+        const caretIndex = typeof input.selectionStart === "number" ? input.selectionStart : input.value.length;
+        commandMirror.textContent = input.value.slice(0, caretIndex);
+        commandField.style.setProperty("--command-scroll", `${-(input.scrollLeft || 0)}px`);
+      }
+
+      function queueCommandCaretSync() {
+        requestAnimationFrame(syncCommandCaret);
+      }
+
+      function appendPrompt(command) {
+        const block = document.createElement("section");
+        block.className = "terminal-block";
+
+        const line = document.createElement("div");
+        line.className = "terminal-line";
+
+        const prompt = document.createElement("span");
+        prompt.className = "prompt";
+        prompt.textContent = "xuanlang@lab:~$";
+
+        const commandText = document.createElement("span");
+        commandText.className = "command";
+        commandText.textContent = command;
+
+        line.append(prompt, commandText);
+        block.append(line);
+        output.append(block);
+        return block;
+      }
+
+      function appendTemplate(block, templateId) {
+        const template = document.getElementById(templateId);
+        block.append(template.content.cloneNode(true));
+      }
+
+      function appendMessage(block, text, tone = "muted") {
+        const wrapper = document.createElement("div");
+        wrapper.className = "output";
+        const paragraph = document.createElement("p");
+        paragraph.className = tone;
+        paragraph.textContent = text;
+        wrapper.append(paragraph);
+        block.append(wrapper);
+      }
+
+      function scrollToBottom() {
+        output.scrollTop = output.scrollHeight;
+      }
+
+      function runCommand(rawCommand) {
+        const command = rawCommand.trim().replace(/\s+/g, " ");
+        if (!command) {
+          return;
+        }
+
+        history.push(command);
+        historyIndex = history.length;
+
+        if (aliases.get(command.toLowerCase()) === "clear") {
+          output.innerHTML = "";
+          input.value = "";
+          syncCommandCaret();
+          return;
+        }
+
+        const block = appendPrompt(command);
+        const normalized = command.toLowerCase();
+
+        if (normalized.startsWith("open ")) {
+          const target = normalized.slice(5).trim();
+          const url = openTargets[target];
+          if (url) {
+            window.open(url, "_blank", "noopener");
+            appendMessage(block, "opening " + target + " ...", "green");
+          } else {
+            appendTemplate(block, "tpl-unknown");
+          }
+          input.value = "";
+          syncCommandCaret();
+          scrollToBottom();
+          return;
+        }
+
+        const action = aliases.get(normalized);
+
+        if (action === "pwd") {
+          appendMessage(block, "/home/xuanlang/profile");
+        } else if (action === "date") {
+          appendMessage(block, new Date().toString());
+        } else if (action === "ls") {
+          appendMessage(block, "about.md  news.log  papers/  reports/  projects/  blog/  cv.timeline  links.net");
+        } else if (action) {
+          appendTemplate(block, "tpl-" + action);
+        } else {
+          appendTemplate(block, "tpl-unknown");
+        }
+
+        input.value = "";
+        syncCommandCaret();
+        scrollToBottom();
+      }
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        runCommand(input.value);
+      });
+
+      document.querySelectorAll("[data-command]").forEach((button) => {
+        button.addEventListener("click", () => {
+          runCommand(button.dataset.command);
+          input.focus();
+        });
+      });
+
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowUp") {
+          event.preventDefault();
+          historyIndex = Math.max(0, historyIndex - 1);
+          input.value = history[historyIndex] || "";
+          syncCommandCaret();
+        }
+
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          historyIndex = Math.min(history.length, historyIndex + 1);
+          input.value = history[historyIndex] || "";
+          syncCommandCaret();
+        }
+      });
+
+      ["input", "keydown", "keyup", "click", "select", "focus", "scroll"].forEach((eventName) => {
+        input.addEventListener(eventName, queueCommandCaretSync);
+      });
+
+      syncCommandCaret();
+    </script>
+  </body>
 </html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diffusion Model 简单介绍 | Xuanlang Dai</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23e8a6c8'/><rect x='6' y='6' width='5' height='19' rx='2' fill='%23100b16'/><rect x='6' y='20' width='17' height='5' rx='2' fill='%23100b16'/><circle cx='23' cy='10' r='4' fill='%23e6c56e'/></svg>"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="../assets/blog.css?v=20260519" />
+    <script>
+      window.BLOG_POST = {
+        id: "diffusion-intro",
+        title: "Diffusion Model 简单介绍",
+        markdown: "1.md",
+        pdf: "1.pdf",
+        summary:
+          "DDPM, DDIM, score-based models, flow matching, text-conditioned generation, CFG, acceleration, RL alignment, caching, and tooling.",
+      };
+
+      window.MathJax = {
+        loader: {
+          load: ["[tex]/ams", "[tex]/color"],
+        },
+        tex: {
+          packages: { "[+]": ["ams", "color"] },
+          tags: "ams",
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
+          processEscapes: true,
+        },
+        options: {
+          skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+        },
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script defer src="../assets/markdown-reader.js?v=20260519"></script>
+  </head>
+
+  <body>
+    <div class="page page-wide">
+      <header class="topbar">
+        <a class="brand" href="../../index.html">xuanlang@homepage:~/blog/1</a>
+        <a class="nav-link" href="../index.html">blog</a>
+        <a class="nav-link" href="../../index.html">home</a>
+        <a class="nav-link" href="1.pdf" target="_blank" rel="noreferrer">pdf</a>
+      </header>
+
+      <main class="shell">
+        <aside class="side">
+          <section class="panel side-card">
+            <div class="side-label">featured post</div>
+            <h2 class="side-title">Diffusion Model 简单介绍</h2>
+            <p class="side-copy">Stdout from a wandering mind.</p>
+            <div class="side-actions">
+              <a class="nav-link" href="1.pdf" target="_blank" rel="noreferrer">pdf</a>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="reader-status">toc</div>
+            <nav class="toc" id="toc" aria-label="Table of contents">
+              <a href="#article">loading...</a>
+            </nav>
+          </section>
+        </aside>
+
+        <article class="article-shell" id="article">
+          <header class="article-header">
+            <div class="prompt">render diffusion-intro.md --style=terminal</div>
+            <h1 class="article-title">Diffusion Model 简单介绍</h1>
+            <p class="article-meta">
+              DDPM, DDIM, score-based models, flow matching, text-conditioned generation, CFG, acceleration, RL alignment, caching, and tooling.
+            </p>
+          </header>
+          <div class="reader-status" id="readerStatus">loading markdown...</div>
+          <div class="markdown" id="markdown"></div>
+        </article>
+      </main>
+
+      <footer class="footer">extra: <a href="1.pdf" target="_blank" rel="noreferrer">pdf</a></footer>
+    </div>
+  </body>
+</html>

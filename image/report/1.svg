@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 324" role="img" aria-labelledby="title desc">
+  <title id="title">Intern-S1-Pro tech report cover</title>
+  <desc id="desc">Cover for Intern-S1-Pro: Scientific Multimodal Foundation Model at Trillion Scale.</desc>
+  <rect width="960" height="324" fill="#fffefe"/>
+
+  <g fill="none" stroke="#17325f" stroke-width="2.2" stroke-linecap="square">
+    <path d="M20 18h120M20 24h120M20 30h120M20 36h120M20 42h66M108 42h32M20 48h58M101 48h39M20 54h50M94 54h46M20 60h43M86 60h54M20 66h36M78 66h62M20 72h29M71 72h69M20 78h22M64 78h76"/>
+    <path d="M58 80l22-28 24 28M65 80h32M74 64h12"/>
+  </g>
+  <text x="20" y="76" fill="#1a1a1a" font-family="Georgia, serif" font-size="10">上海人工智能实验室</text>
+  <text x="20" y="90" fill="#1a1a1a" font-family="Georgia, serif" font-size="7">Shanghai Artificial Intelligence Laboratory</text>
+
+  <line x1="152" y1="20" x2="152" y2="92" stroke="#2d2d2d" stroke-width="1.4"/>
+
+  <g transform="translate(168 25)">
+    <path d="M20 28c-12-8-11-21 0-28 11 7 12 20 0 28z" fill="#25448a"/>
+    <path d="M12 24c-18 4-20 21 2 28 10 3 23 3 34 0 22-7 20-24 2-28" fill="none" stroke="#25448a" stroke-width="5"/>
+    <path d="M24 2c8-8 22-4 23 9M16 2c-8-8-22-4-23 9" fill="none" stroke="#25448a" stroke-width="5"/>
+    <circle cx="14" cy="31" r="3" fill="#25448a"/>
+    <circle cx="42" cy="31" r="3" fill="#25448a"/>
+    <path d="M21 42c6 5 12 5 18 0" fill="none" stroke="#25448a" stroke-width="4"/>
+  </g>
+  <text x="224" y="46" fill="#1d3d86" font-family="Inter, Arial, sans-serif" font-size="31" font-weight="800">书生</text>
+  <text x="226" y="76" fill="#1d3d86" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">Intern</text>
+
+  <text x="890" y="90" fill="#111" font-family="Georgia, serif" font-size="16" font-style="italic">2026-4-3</text>
+  <line x1="18" y1="98" x2="958" y2="98" stroke="#111" stroke-width="2"/>
+
+  <text x="18" y="170" fill="#050505" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="700">
+    <tspan x="18" dy="0">Intern-S1-Pro: Scientific Multimodal</tspan>
+    <tspan x="18" dy="46">Foundation Model at Trillion Scale</tspan>
+  </text>
+
+  <text x="18" y="276" fill="#111" font-family="Georgia, 'Times New Roman', serif" font-size="21" font-weight="700">Intern-S1-Pro Team, Shanghai AI Laboratory</text>
+  <line x1="18" y1="315" x2="958" y2="315" stroke="#111" stroke-width="2"/>
+</svg>
