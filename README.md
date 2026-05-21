@@ -6,13 +6,6 @@ I'm a senior Computer Science student at Xi'an Jiaotong University, incoming PhD
 
 ---
 
-### 🔧 Research Interests
-
-- 🗣️ NLP
-- 🖼️ Multimodal Learning
-
----
-
 ### 🚀 Projects & Experience
 
 - 🎓 Exchange Student at **UC Berkeley** (2024)
@@ -28,15 +21,6 @@ I'm a senior Computer Science student at Xi'an Jiaotong University, incoming PhD
 - 🏠 Academic Homepage: [lennoxdai.github.io](https://lennoxdai.github.io/LennoxDai/)
 - 🎓 Google Scholar: [Xuanlang Dai](https://scholar.google.com/citations?user=OeeH1HAAAAAJ&hl=en)
 - 🤗 Hugging Face: [XuanlangDai](https://huggingface.co/XuanlangDai)
-
----
-
-### 💡 Fun Facts
-
-- 🌍 Based in Shanghai, China
-- 🥤 Cola enthusiast
-- 🎮 Anime lover and dedicated Satone Shichimiya fan
-- 🔑 Once lost a GitHub account — find my old one here: [Lennox-Dai (Vitamind)](https://github.com/Lennox-Dai)
 
 ---
 
