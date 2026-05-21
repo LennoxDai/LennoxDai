@@ -939,6 +939,12 @@
           align-items: flex-start;
         }
       }
+
+      @media (prefers-reduced-motion: reduce) {
+        .command-caret {
+          animation: none;
+        }
+      }
     </style>
   </head>
 
