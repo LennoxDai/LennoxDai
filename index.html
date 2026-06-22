@@ -1207,6 +1207,17 @@
             </div>
           </div>
           <div class="timeline-row">
+            <span class="time">Jun 2026</span>
+            <div>
+              <div class="entry-title"><span class="green">Paper</span> EndoCoT accepted by ECCV26</div>
+              <div class="entry-subtitle">
+                Our paper
+                <a class="terminal-link" href="https://arxiv.org/abs/2603.12252" target="_blank" rel="noreferrer">EndoCoT</a>
+                has been accepted by ECCV26!
+              </div>
+            </div>
+          </div>
+          <div class="timeline-row">
             <span class="time">May 24, 2026</span>
             <div>
               <div class="entry-title"><span class="green">Talk</span> Gave a Talk at Fudan University</div>
@@ -1232,9 +1243,9 @@
               <strong>Xuanlang Dai</strong>, Yujie Zhou, Long Xing, Jiazi Bu, Xilin Wei, Yuhong Liu, Beichen Zhang, Kai Chen,
               <a class="terminal-link" href="https://yuhangzang.github.io/" target="_blank" rel="noreferrer">Yuhang Zang</a>
             </p>
-            <p class="media-meta"><span class="amber">Preprint</span> · arXiv, Mar 2026</p>
+            <p class="media-meta"><span class="amber">ECCV26</span> · Accepted, 2026</p>
             <div class="media-actions">
-              <a class="media-link" href="https://arxiv.org/abs/2603.12252" target="_blank" rel="noreferrer">arXiv</a>
+              <a class="media-link" href="https://arxiv.org/abs/2603.12252" target="_blank" rel="noreferrer">ECCV26</a>
               <a class="media-link" href="https://huggingface.co/papers/2603.12252" target="_blank" rel="noreferrer">🤗 Paper</a>
               <a class="media-link" href="https://huggingface.co/datasets/internlm/EndoCoT-Data" target="_blank" rel="noreferrer">🤗 Dataset</a>
               <a class="media-link" href="https://github.com/InternLM/EndoCoT" target="_blank" rel="noreferrer">GitHub</a>
@@ -1441,6 +1452,46 @@
       const history = [];
       let historyIndex = 0;
 
+      function isEditableTarget(target) {
+        if (!target || !(target instanceof HTMLElement)) {
+          return false;
+        }
+
+        const tagName = target.tagName.toLowerCase();
+        return target.isContentEditable || tagName === "input" || tagName === "textarea" || tagName === "select";
+      }
+
+      function focusCommandInput() {
+        input.focus({ preventScroll: true });
+        const end = input.value.length;
+        input.setSelectionRange(end, end);
+        syncCommandCaret();
+      }
+
+      function insertAtCommandCursor(text) {
+        const start = typeof input.selectionStart === "number" ? input.selectionStart : input.value.length;
+        const end = typeof input.selectionEnd === "number" ? input.selectionEnd : input.value.length;
+        input.value = input.value.slice(0, start) + text + input.value.slice(end);
+        const nextPosition = start + text.length;
+        input.setSelectionRange(nextPosition, nextPosition);
+        syncCommandCaret();
+      }
+
+      function deleteBeforeCommandCursor() {
+        const start = typeof input.selectionStart === "number" ? input.selectionStart : input.value.length;
+        const end = typeof input.selectionEnd === "number" ? input.selectionEnd : input.value.length;
+
+        if (start !== end) {
+          input.value = input.value.slice(0, start) + input.value.slice(end);
+          input.setSelectionRange(start, start);
+        } else if (start > 0) {
+          input.value = input.value.slice(0, start - 1) + input.value.slice(start);
+          input.setSelectionRange(start - 1, start - 1);
+        }
+
+        syncCommandCaret();
+      }
+
       function syncCommandCaret() {
         const caretIndex = typeof input.selectionStart === "number" ? input.selectionStart : input.value.length;
         commandMirror.textContent = input.value.slice(0, caretIndex);
@@ -1569,6 +1620,36 @@
           historyIndex = Math.min(history.length, historyIndex + 1);
           input.value = history[historyIndex] || "";
           syncCommandCaret();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey || event.isComposing || isEditableTarget(event.target)) {
+          return;
+        }
+
+        if ((event.key === "Enter" || event.key === " ") && event.target instanceof HTMLElement && event.target.closest("a, button")) {
+          return;
+        }
+
+        if (event.key.length === 1) {
+          event.preventDefault();
+          focusCommandInput();
+          insertAtCommandCursor(event.key);
+          return;
+        }
+
+        if (event.key === "Backspace") {
+          event.preventDefault();
+          focusCommandInput();
+          deleteBeforeCommandCursor();
+          return;
+        }
+
+        if (event.key === "Enter") {
+          event.preventDefault();
+          focusCommandInput();
+          runCommand(input.value);
         }
       });
 
